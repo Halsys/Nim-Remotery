@@ -78,34 +78,34 @@ type
         RMTSF_None = 0
         RMTSF_Aggregate = 1
 
-    rmtMallocPtr* = ptr proc(mm_context: pointer, size: rmtU32): pointer
-    rmtReallocPtr* = ptr proc(mm_context: pointer, pntr: pointer, size: rmtU32): pointer
-    rmtFreePtr* = ptr proc(mm_context: pointer, pntr: pointer)
+    rmtMallocPtr* = proc(mm_context: pointer, size: rmtU32): pointer
+    rmtReallocPtr* = proc(mm_context: pointer, pntr: pointer, size: rmtU32): pointer
+    rmtFreePtr* = proc(mm_context: pointer, pntr: pointer)
     rmtInputHandlerPtr* = ptr proc(text: cstring, context: pointer)
 
     rmtSettings* = object
-        port: rmtU16
-        limit_connections_to_localhost: rmtBool
-        msSleepBetweenServerUpdates: rmtU32
-        messageQueueSizeInBytes: rmtU32
-        maxNbMessagesPerUpdate: rmtU32
-        malloc: rmtMallocPtr
-        realloc: rmtReallocPtr
-        free: rmtFreePtr
-        mm_context: pointer
-        input_handler: rmtInputHandlerPtr
-        input_handler_context: pointer
-        logFilename: rmtPStr
+        port*: rmtU16
+        limit_connections_to_localhost*: rmtBool
+        msSleepBetweenServerUpdates*: rmtU32
+        messageQueueSizeInBytes*: rmtU32
+        maxNbMessagesPerUpdate*: rmtU32
+        malloc*: rmtMallocPtr
+        realloc*: rmtReallocPtr
+        free*: rmtFreePtr
+        mm_context*: pointer
+        input_handler*: rmtInputHandlerPtr
+        input_handler_context*: pointer
+        logFilename*: rmtPStr
 
     rmtCUDABind* = object
-        context: pointer
-        CtxSetCurrent: pointer
-        CtxGetCurrent: pointer
-        EventCreate: pointer
-        EventDestroy: pointer
-        EventRecord: pointer
-        EventQuery: pointer
-        EventElapsedTime: pointer
+        context*: pointer
+        CtxSetCurrent*: pointer
+        CtxGetCurrent*: pointer
+        EventCreate*: pointer
+        EventDestroy*: pointer
+        EventRecord*: pointer
+        EventQuery*: pointer
+        EventElapsedTime*: pointer
 
 proc Settings*(): ptr rmtSettings =
     when defined(RMT_ENABLED):
